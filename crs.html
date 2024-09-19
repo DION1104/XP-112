@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Interactive Webpage Test</title> 
+ <style type="text/css" id="dcoder_stylesheet">body {
+    background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+#form-feedback {
+    font-weight: bold;
+}
+
+#toggle-text-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}</style></head> 
+ <body> 
+  <h1>Welcome to David Ossai's Interactive Page</h1> 
+  <form id="contact-form"> <label for="name">Name:</label> 
+   <input type="text" id="name" name="name"> 
+   <br> 
+   <br> <label for="email">Email:</label> 
+   <input type="email" id="email" name="email"> 
+   <br> 
+   <br> <label for="message">Message:</label> <textarea id="message" name="message"></textarea> 
+   <br> 
+   <br> 
+   <input type="submit" value="Submit"> 
+  </form> 
+  <p id="form-feedback"></p> <button id="toggle-text-button">Toggle Text</button> 
+  <p id="toggle-paragraph">let me know if i can be of assistance, This text can be toggled.</p> 
+  <script src="script.js"></script> 
+ 
+<script type="text/javascript" id="dcoder_script">document.addEventListener("DOMContentLoaded", function() {
+    let contactForm = document.getElementById("contact-form");
+    let feedback = document.getElementById("form-feedback");
+    let toggleButton = document.getElementById("toggle-text-button");
+    let toggleParagraph = document.getElementById("toggle-paragraph");
+
+    // Form Submission Handling
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message").value;
+
+        if (name === "" || email === "" || message === "") {
+            feedback.innerText = "Please fill out all fields.";
+            feedback.style.color = "red";
+        } else {
+            feedback.innerText = "Thank you, " + name + "! We will contact you at " + email + ".";
+            feedback.style.color = "green";
+        }
+    });
+
+    // Toggle Paragraph Visibility
+    toggleButton.addEventListener("click", function() {
+        if (toggleParagraph.style.display === "none") {
+            toggleParagraph.style.display = "block";
+        } else {
+            toggleParagraph.style.display = "none";
+        }
+    });
+});
+function outerFunction() {
+    let outerVariable = 'I am outside!';
+
+    function innerFunction() {
+        console.log(outerVariable); // Can access the outerVariable
+    }
+
+    return innerFunction;
+}
+
+const myClosure = outerFunction();
+myClosure(); // Logs 'I am outside!'
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));</script></body></html>
