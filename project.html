@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>My Portfolio</title> 
+  <link rel="stylesheet" href="styles.css"> 
+ <style type="text/css" id="dcoder_stylesheet">body {
+  background-image: url('https://images.unsplash.com/photo-1593642532400-2682810df593?fit=crop&w=1500&q=80');
+   background-size : cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Styling for the navigation links */
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #FFD700; /* Gold color on hover */
+}
+
+/* Adjusting the sections */
+section {
+    padding: 50px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    padding: 2rem;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+}</style></head> 
+ <body> 
+  <header> 
+   <h1>David Ossai - Web Developer</h1> 
+   <nav> <a href="#home">Home</a> <a href="#projects">Projects</a> <a href="#about">About Me</a> <a href="#contact">Contact</a> 
+   </nav> 
+  </header> <!-- Home Section --> 
+  <section id="home"> 
+   <h2>Welcome!</h2> 
+   <p>Good [time of day], I'm David Ossai, a passionate web developer.</p> 
+  </section> <!-- Projects Section --> 
+  <section id="projects"> 
+   <h2>My Projects</h2> 
+   <p>Here you can find some of the projects I have worked on... content://com.paprbit.dcoder.fileprovider/files/temp.html</p> 
+  </section> <!-- About Me Section --> 
+  <section id="about"> 
+   <h2>About Me</h2> 
+   <p>I am a civil engineering student who loves web development...</p> 
+  </section> <!-- Contact Section --> 
+  <section id="contact"> 
+   <h2>Contact Me</h2> 
+   <p>ossai831@gmail.com</p> 
+   <form> <!-- Simple form goes here --> 
+   </form> 
+  </section> 
+  <footer> 
+   <p>© 2024 David Ossai</p> 
+  </footer> 
+ 
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News and Weather App</title>
+
+
+    <h1>News and Weather App</h1>
+    
+    <!-- City input for weather -->
+    <input type="text" id="cityInput" placeholder="Enter city">
+    <button id="fetchData">Fetch News and Weather</button>
+    
+    <div id="weather"></div>
+    <div id="news"></div>
+    
+    <script src="app.js"></script>
+
+<script type="text/javascript" id="dcoder_script">const greetingElement = document.querySelector("#home p");
+const hour = new Date().getHours();
+
+if (hour < 12) {
+    greetingElement.textContent = "Good Morning, I'm David Ossai, a passionate web developer.";
+} else if (hour < 18) {
+    greetingElement.textContent = "Good Afternoon, I'm David Ossai, a passionate web developer.";
+} else {
+    greetingElement.textContent = "Good Evening, I'm David Ossai, a passionate web developer.";
+}
+// Replace with your API keys
+const newsApiKey = 'YOUR_NEWS_API_KEY';
+const weatherApiKey = 'YOUR_WEATHER_API_KEY';
+
+// Function to fetch news
+async function fetchNews() {
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsApiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("News Data: ", data.articles);
+        displayNews(data.articles);
+    } catch (error) {
+        console.error("Error fetching news: ", error);
+    }
+}
+
+// Function to fetch weather
+async function fetchWeather(city) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("Weather Data: ", data);
+        displayWeather(data);
+    } catch (error) {
+        console.error("Error fetching weather: ", error);
+    }
+}
+
+// Function to display news on the webpage
+function displayNews(articles) {
+    const newsContainer = document.getElementById('news');
+    newsContainer.innerHTML = '';
+    articles.forEach(article => {
+        const articleElement = document.createElement('div');
+        articleElement.innerHTML = `
+            <h3>${article.title}</h3>
+            <p>${article.description}</p>
+            <a href="${article.url}" target="_blank">Read more</a>
+        `;
+        newsContainer.appendChild(articleElement);
+    });
+}
+
+// Function to display weather on the webpage
+function displayWeather(weatherData) {
+    const weatherContainer = document.getElementById('weather');
+    weatherContainer.innerHTML = `
+        <h3>Weather in ${weatherData.name}</h3>
+        <p>Temperature: ${weatherData.main.temp}°C</p>
+        <p>Weather: ${weatherData.weather[0].description}</p>
+        <p>Humidity: ${weatherData.main.humidity}%</p>
+        <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+    `;
+}
+
+// Example usage
+document.getElementById('fetchData').addEventListener('click', () => {
+    const city = document.getElementById('cityInput').value;
+    fetchNews();
+    fetchWeather(city);
+});
+}
+function displayError(message) {
+    const weatherContainer = document.getElementById('weather');
+    weatherContainer.innerHTML = `<p>Error: ${message}</p>`;
+}</script></body></html>
+
